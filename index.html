@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nandhagopi V — Full Stack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --navy: #0f1f3d;
+        --navy-mid: #1a2f52;
+        --accent: #2563eb;
+        --accent-light: #dbeafe;
+        --accent-text: #1d4ed8;
+        --gold: #b45309;
+        --gold-light: #fef3c7;
+        --text: #1e293b;
+        --muted: #64748b;
+        --border: #e2e8f0;
+        --bg: #ffffff;
+        --surface: #f8fafc;
+        --serif: "DM Serif Display", Georgia, serif;
+        --sans: "DM Sans", system-ui, sans-serif;
+        --mono: "JetBrains Mono", monospace;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      html {
+        font-size: 10pt;
+      }
+
+      body {
+        font-family: var(--sans);
+        color: var(--text);
+        background: var(--bg);
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+        line-height: 1.5;
+      }
+
+      /* HEADER */
+      .header {
+        background: var(--navy);
+        color: white;
+        padding: 36px 44px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        right: -60px;
+        top: -60px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+      }
+
+      .header::after {
+        content: "";
+        position: absolute;
+        right: 40px;
+        bottom: -40px;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .name-block h1 {
+        font-family: var(--serif);
+        font-size: 28pt;
+        font-weight: 400;
+        letter-spacing: -0.5px;
+        color: white;
+        line-height: 1.1;
+      }
+
+      .name-block h1 span {
+        color: #93c5fd;
+      }
+
+      .name-block .title {
+        font-family: var(--mono);
+        font-size: 8.5pt;
+        font-weight: 400;
+        color: #93c5fd;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-top: 8px;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px 24px;
+        margin-top: 20px;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 8pt;
+        color: #cbd5e1;
+      }
+
+      .contact-item svg {
+        width: 11px;
+        height: 11px;
+        flex-shrink: 0;
+        opacity: 0.7;
+      }
+
+      .contact-item a {
+        color: #93c5fd;
+        text-decoration: none;
+      }
+
+      /* MAIN LAYOUT */
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr 2.2fr;
+        min-height: calc(297mm - 120px);
+      }
+
+      /* LEFT SIDEBAR */
+      .sidebar {
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        padding: 28px 20px;
+      }
+
+      /* RIGHT MAIN */
+      .main {
+        padding: 28px 36px 28px 28px;
+      }
+
+      /* SECTION HEADINGS */
+      .section {
+        margin-bottom: 22px;
+      }
+
+      .section-label {
+        font-family: var(--mono);
+        font-size: 7pt;
+        font-weight: 500;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 5px;
+        margin-bottom: 12px;
+      }
+
+      .sidebar .section-label {
+        color: var(--accent-text);
+        border-bottom-color: var(--accent-light);
+      }
+
+      /* SKILLS */
+      .skill-category {
+        margin-bottom: 14px;
+      }
+
+      .skill-category-name {
+        font-size: 7.5pt;
+        font-weight: 600;
+        color: var(--text);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .tag {
+        background: white;
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-size: 7.5pt;
+        padding: 2px 8px;
+        border-radius: 3px;
+        line-height: 1.6;
+      }
+
+      .tag.accent {
+        background: var(--accent-light);
+        border-color: #bfdbfe;
+        color: var(--accent-text);
+        font-weight: 500;
+      }
+
+      /* EDUCATION */
+      .edu-item {
+        margin-bottom: 12px;
+      }
+
+      .edu-degree {
+        font-size: 8.5pt;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.3;
+      }
+
+      .edu-school {
+        font-size: 7.5pt;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      .edu-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 7.5pt;
+        color: var(--muted);
+        margin-top: 3px;
+      }
+
+      .cgpa {
+        background: var(--gold-light);
+        color: var(--gold);
+        font-size: 7pt;
+        font-weight: 600;
+        padding: 1px 6px;
+        border-radius: 3px;
+      }
+
+      /* CERTS */
+      .cert-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+        margin-bottom: 8px;
+        font-size: 7.5pt;
+        color: var(--text);
+        line-height: 1.4;
+      }
+
+      .cert-item::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        background: var(--accent);
+        border-radius: 50%;
+        margin-top: 4px;
+        flex-shrink: 0;
+      }
+
+      /* EXPERIENCE */
+      .exp-item {
+        margin-bottom: 18px;
+        position: relative;
+        padding-left: 14px;
+      }
+
+      .exp-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 5px;
+        bottom: -18px;
+        width: 1px;
+        background: var(--border);
+      }
+
+      .exp-item:last-child::before {
+        display: none;
+      }
+
+      .exp-item::after {
+        content: "";
+        position: absolute;
+        left: -3px;
+        top: 5px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        border: 1.5px solid white;
+        outline: 1px solid var(--accent);
+      }
+
+      .exp-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2px;
+      }
+
+      .exp-role {
+        font-family: var(--serif);
+        font-size: 11.5pt;
+        color: var(--navy);
+        font-weight: 400;
+        line-height: 1.2;
+      }
+
+      .exp-period {
+        font-family: var(--mono);
+        font-size: 7pt;
+        color: var(--muted);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 2px 7px;
+        border-radius: 3px;
+        white-space: nowrap;
+        margin-left: 8px;
+        flex-shrink: 0;
+      }
+
+      .exp-company {
+        font-size: 8pt;
+        color: var(--accent-text);
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+
+      /* PROJECTS INSIDE EXPERIENCE */
+      .project-block {
+        background: white;
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        border-radius: 0 4px 4px 0;
+        padding: 9px 12px;
+        margin-bottom: 8px;
+      }
+
+      .project-name {
+        font-size: 8.5pt;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 3px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .project-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3px;
+        margin-top: 4px;
+      }
+
+      .stack-pill {
+        font-family: var(--mono);
+        font-size: 6.5pt;
+        color: var(--accent-text);
+        background: var(--accent-light);
+        padding: 1px 6px;
+        border-radius: 2px;
+      }
+
+      .bullet-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .bullet-list li {
+        font-size: 8pt;
+        color: var(--text);
+        padding: 2px 0 2px 14px;
+        position: relative;
+        line-height: 1.5;
+      }
+
+      .bullet-list li::before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        font-size: 7pt;
+        top: 3px;
+      }
+
+      /* SUMMARY */
+      .summary-text {
+        font-size: 8.5pt;
+        color: var(--muted);
+        line-height: 1.7;
+        border-left: 3px solid var(--accent);
+        padding-left: 12px;
+        font-style: italic;
+      }
+
+      /* DECLARATION */
+      .declaration {
+        border-top: 1px solid var(--border);
+        margin-top: 16px;
+        padding-top: 10px;
+        font-size: 7.5pt;
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      @media print {
+        body {
+          width: 210mm;
+        }
+        .header {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .sidebar {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-top">
+        <div class="name-block">
+          <h1>Nandhagopi <span>V.</span></h1>
+          <p class="title">Full Stack Developer</p>
+        </div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.03a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+            />
+          </svg>
+          +91 63823 72062
+        </div>
+        <div class="contact-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          <a href="mailto:nandhuu@outlook.in">nandhuu@outlook.in</a>
+        </div>
+        <div class="contact-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          Dindigul, Tamil Nadu
+        </div>
+        <div class="contact-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"
+            />
+          </svg>
+          <a href="https://github.com/Nandhagopiv">github.com/Nandhagopiv</a>
+        </div>
+        <div class="contact-item">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"
+            />
+            <rect x="2" y="9" width="4" height="12" />
+            <circle cx="4" cy="4" r="2" />
+          </svg>
+          <a href="https://linkedin.com/in/nandhu2000"
+            >linkedin.com/in/nandhu2000</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <!-- SKILLS -->
+        <div class="section">
+          <div class="section-label">Technical Skills</div>
+
+          <div class="skill-category">
+            <div class="skill-category-name">Frontend</div>
+            <div class="skill-tags">
+              <span class="tag accent">Vue.js</span>
+              <span class="tag accent">Vuetify</span>
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript ES6+</span>
+              <span class="tag">React.js</span>
+              <span class="tag">Axios</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-name">Backend</div>
+            <div class="skill-tags">
+              <span class="tag accent">Fastify</span>
+              <span class="tag accent">Node.js</span>
+              <span class="tag">Prisma ORM</span>
+              <span class="tag">JWT Auth</span>
+              <span class="tag">REST APIs</span>
+              <span class="tag">Middleware</span>
+              <span class="tag">Nodemailer</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-name">Database & Cache</div>
+            <div class="skill-tags">
+              <span class="tag accent">PostgreSQL</span>
+              <span class="tag accent">MongoDB</span>
+              <span class="tag">Redis</span>
+              <span class="tag">Memurai</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-name">Integrations</div>
+            <div class="skill-tags">
+              <span class="tag">ISG QR Payments</span>
+              <span class="tag">Gupshup SMS</span>
+              <span class="tag">Jio DLT</span>
+              <span class="tag">OTP Services</span>
+              <span class="tag">Payment Gateways</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-name">Tools & DevOps</div>
+            <div class="skill-tags">
+              <span class="tag">Git</span>
+              <span class="tag">GitHub</span>
+              <span class="tag">Postman</span>
+              <span class="tag">Tailwind CSS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PERSONAL PROJECTS -->
+        <div class="section">
+          <div class="section-label">Personal Projects</div>
+          <div class="exp-item" style="padding-left: 14px">
+            <div class="exp-item::after"></div>
+            <div class="exp-header">
+              <div class="exp-role" style="font-size: 9.5pt">
+                AcTodo — Activity Manager
+              </div>
+            </div>
+
+            <ul class="bullet-list" style="margin-top: 4px">
+              <li>
+                Built a full-stack task management application with secure user
+                authentication, task creation, editing, deletion, and persistent
+                session handling using React and MongoDB
+              </li>
+            </ul>
+
+            <div class="project-stack" style="margin-top: 5px">
+              <span class="stack-pill">React.js</span>
+              <span class="stack-pill">Tailwind CSS</span>
+              <span class="stack-pill">Node.js</span>
+              <span class="stack-pill">Express.js</span>
+              <span class="stack-pill">MongoDB</span>
+              <span class="stack-pill">Mongoose</span>
+              <span class="stack-pill">React Router</span>
+            </div>
+          </div>
+          <div class="exp-item" style="padding-left: 14px">
+            <div class="exp-item::after"></div>
+            <div class="exp-header">
+              <div class="exp-role" style="font-size: 9.5pt">
+                Weather Forecasting Application
+              </div>
+            </div>
+            <ul class="bullet-list" style="margin-top: 4px">
+              <li>
+                Developed a real-time weather app consuming OpenWeather API with
+                location-based search, displaying temperature, humidity, and
+                multi-day forecasts with responsive UI
+              </li>
+            </ul>
+            <div class="project-stack" style="margin-top: 5px">
+              <span class="stack-pill">React.js</span
+              ><span class="stack-pill">Tailwind CSS</span
+              ><span class="stack-pill">OpenWeather API</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CERTIFICATIONS -->
+        <div class="section">
+          <div class="section-label">Certifications</div>
+          <div class="cert-item">
+            Full Stack Web Development — Error Makes Clever Academy
+          </div>
+          <div class="cert-item">React.js & UI/UX Design — Internshala</div>
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="main">
+        <!-- SUMMARY -->
+        <div class="section">
+          <div class="section-label">Profile</div>
+          <p class="summary-text">
+            Full Stack Developer with proven experience building
+            production-grade web applications and fintech systems. Specialised
+            in Vue.js frontends, Fastify APIs, and payment infrastructure —
+            including ISG QR integrations, merchant management systems, and
+            billing platforms. Adept at translating complex business workflows
+            into clean, maintainable code.
+          </p>
+        </div>
+
+        <!-- EXPERIENCE -->
+        <div class="section">
+          <div class="section-label">Professional Experience</div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <div class="exp-role">Junior Software Engineer</div>
+              <div class="exp-period">Jun 2025 — Present</div>
+            </div>
+            <div class="exp-company">
+              Bucks Box Software Pvt Ltd · Karaikudi, Tamil Nadu
+            </div>
+
+            <!-- PROJECT 1: BucksFee -->
+            <div class="project-block">
+              <div class="project-name">
+                BucksFee — Student Fee & Invoice Management System
+              </div>
+              <ul class="bullet-list">
+                <li>
+                  Built end-to-end fee collection platform for educational
+                  institutions handling student records, invoice generation, and
+                  payment tracking workflows
+                </li>
+                <li>
+                  Developed dynamic fee structures, instalment plans, and
+                  automated receipt generation with PDF export functionality
+                </li>
+                <li>
+                  Implemented responsive dashboards for administrators to
+                  monitor payment status, overdue fees, and collection summaries
+                  in real time
+                </li>
+              </ul>
+              <div class="project-stack">
+                <span class="stack-pill">Vue.js</span
+                ><span class="stack-pill">Vuetify</span
+                ><span class="stack-pill">Fastify</span
+                ><span class="stack-pill">Prisma</span
+                ><span class="stack-pill">PostgreSQL</span
+                ><span class="stack-pill">PDF Export</span>
+              </div>
+            </div>
+
+            <!-- PROJECT 2: Billing & Accounting -->
+            <div class="project-block">
+              <div class="project-name">Billing & Accounting Platform</div>
+              <ul class="bullet-list">
+                <li>
+                  Developed a comprehensive billing and accounting system
+                  supporting invoice management, expense tracking, ledger
+                  entries, and financial reporting
+                </li>
+                <li>
+                  Integrated ISG QR payment infrastructure — supporting both
+                  static and dynamic QR codes — enabling merchants to accept
+                  in-store payments directly from the platform
+                </li>
+                <li>
+                  Architected backend service layer with Fastify and Prisma ORM,
+                  implementing transaction reconciliation and automated
+                  financial summaries
+                </li>
+              </ul>
+              <div class="project-stack">
+                <span class="stack-pill">Vue.js</span
+                ><span class="stack-pill">Fastify</span
+                ><span class="stack-pill">PostgreSQL</span
+                ><span class="stack-pill">ISG QR</span
+                ><span class="stack-pill">Prisma ORM</span
+                ><span class="stack-pill">Redis</span>
+              </div>
+            </div>
+
+            <!-- PROJECT 3: Merchant System -->
+            <div class="project-block">
+              <div class="project-name">
+                Merchant Management System & Payment App
+              </div>
+              <ul class="bullet-list">
+                <li>
+                  Built a full merchant onboarding and management system
+                  enabling businesses to manage accounts, transactions, and QR
+                  payment configurations via the ISG gateway
+                </li>
+                <li>
+                  Developed a standalone mobile-friendly payment application
+                  supporting both static and dynamic ISG QR code generation for
+                  real-time payment collection
+                </li>
+                <li>
+                  Implemented JWT-based authentication, role-based access
+                  control, and secure API middleware; integrated Gupshup Plugin
+                  and Jio DLT for OTP-verified transactions
+                </li>
+                <li>
+                  Configured CORS, Fastify preHandlers, and Redis caching for
+                  session management and performance optimisation across the
+                  payment stack
+                </li>
+              </ul>
+              <div class="project-stack">
+                <span class="stack-pill">Vue.js</span
+                ><span class="stack-pill">Vuetify</span
+                ><span class="stack-pill">Fastify</span
+                ><span class="stack-pill">ISG Static QR</span
+                ><span class="stack-pill">ISG Dynamic QR</span
+                ><span class="stack-pill">Gupshup</span
+                ><span class="stack-pill">Jio DLT</span
+                ><span class="stack-pill">JWT</span
+                ><span class="stack-pill">Redis</span>
+              </div>
+            </div>
+
+            <!-- PROJECT 4: Online Course -->
+            <!-- <div class="project-block">
+              <div class="project-name">Online Course Management Platform</div>
+              <ul class="bullet-list">
+                <li>
+                  Built a modern course management platform with course
+                  catalogue, syllabus management, instructor profiles, and
+                  enrolment workflows
+                </li>
+                <li>
+                  Developed reusable frontend component library and RESTful
+                  backend APIs for dynamic content delivery
+                </li>
+              </ul>
+              <div class="project-stack">
+                <span class="stack-pill">Vue.js</span
+                ><span class="stack-pill">Vuetify</span
+                ><span class="stack-pill">Fastify</span
+                ><span class="stack-pill">PostgreSQL</span>
+              </div>
+            </div> -->
+
+            <!-- Additional contributions -->
+            <ul class="bullet-list" style="margin-top: 8px">
+              <li>
+                Implemented Nodemailer-based transactional email workflows for
+                notifications, OTP delivery, and invoice dispatch
+              </li>
+              <li>
+                Collaborated in agile team environment to deliver
+                production-ready, responsive applications on schedule
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="section">
+          <div class="section-label">Education</div>
+
+          <div class="edu-item">
+            <div class="edu-degree">MBA — Business Administration</div>
+            <div class="edu-school">
+              Hindusthan Institute of Technology, Coimbatore
+            </div>
+            <div class="edu-meta">
+              <span>2021 – 2023</span>
+              <span class="cgpa">CGPA 6.9</span>
+            </div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-degree">B.Com — Computer Applications</div>
+            <div class="edu-school">
+              Parvathy's Arts & Science College, Dindigul
+            </div>
+            <div class="edu-meta">
+              <span>2018 – 2021</span>
+              <span class="cgpa">CGPA 6.5</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="declaration">
+          I hereby declare that the information provided above is true and
+          accurate to the best of my knowledge and belief.
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
